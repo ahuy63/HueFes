@@ -6,7 +6,10 @@ namespace HueFes.Data
     {
         ILocationRepository LocationRepository { get; }
         ILocationCategoryRepository LocationCategoryRepository { get; }
-
+        IEventRepository EventRepository { get; }
+        IShowRepository ShowRepository { get; }
+        IShowCategoryRepository ShowCategoryRepository { get; }
+        IEventImageRepository EventImageRepository { get; }
 
         void Commit();
         void RollBack();

@@ -19,6 +19,9 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient(typeof(ILocationService), typeof(LocationService));
 builder.Services.AddTransient(typeof(ILocationCategoryService), typeof(LocationCategoryService));
+builder.Services.AddTransient(typeof(IEventService), typeof(EventService));
+builder.Services.AddTransient(typeof(IShowService), typeof(ShowService));
+builder.Services.AddTransient(typeof(IShowCategoryService), typeof(ShowCategoryService));
 
 
 

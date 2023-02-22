@@ -3,13 +3,18 @@
     public class Show
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Content { get; set; }
-        public int Type_Inoff { get; set; } // 1: khong ban ve, 2: ban ve
-        public int Type_Program { get; set; } // 1: Tieu diem, 3: Cong dong
-        public double Price { get; set; }
 
-        public ICollection<ShowDetail> ShowDetails { get; set; }    
-        public ICollection<String> Images { get; set; }
+        public int EventId { get; set; }
+        public Event Event { get; set; }
+
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+        public int LocationId { get; set; }
+        public Location Location { get; set; }
+
+        public int ShowCategoryId { get; set; }
+        public ShowCategory ShowCategory { get; set; }
+
     }
 }

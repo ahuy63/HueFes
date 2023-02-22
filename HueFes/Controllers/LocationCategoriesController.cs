@@ -25,7 +25,7 @@ namespace HueFes.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var result = await _locationCategoryService.GetById(id);
-            if (result != null)
+            if (result != null) 
             {
                 return Ok(_mapper.Map<LocationCategoryVM_Detail>(result));
             }
