@@ -20,7 +20,12 @@ namespace HueFes.Controllers
 
         [HttpGet("GetAllEvents")]
         public async Task<IActionResult> GetAll()
-            => Ok(_mapper.Map<IEnumerable<EventVM>>(await _eventService.GetAll()));
+        {
+            var a = await _eventService.GetAll();
+            var b = _mapper.Map<IEnumerable<Event>>(a);
+            return Ok(_mapper.Map<IEnumerable<EventVM>>(await _eventService.GetAll()));
+        }
+            
 
         [HttpGet("GetAllByTieuDiem")]
         public async Task<IActionResult> GetByTieuDiem()

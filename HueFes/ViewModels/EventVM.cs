@@ -16,7 +16,7 @@ namespace HueFes.ViewModels
         public int Type_Inoff { get; set; } // 1: khong ban ve, 2: ban ve
         public int Type_Program { get; set; } // 1: Tieu diem, 3: Cong dong
         public double Price { get; set; }
-        public IEnumerable<EventImageVM> EventImages { get; set; }
+        public ICollection<EventImageVM> EventImages { get; set; }
     }
 
     public class EventVM_Detail

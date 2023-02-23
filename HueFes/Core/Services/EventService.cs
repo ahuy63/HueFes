@@ -63,5 +63,21 @@ namespace HueFes.Core.Services
             }
         }
 
+        public async Task<bool> AddImage(IEnumerable<EventImage> input)
+        {
+            try
+            {
+                foreach (var item in input)
+                {
+                    await _unitOfWork.EventImageRepository.Add(item);
+                }
+                await _unitOfWork.CommitAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

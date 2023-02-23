@@ -22,8 +22,10 @@ namespace HueFes.ViewModels
     }
     public class ShowVM_Input
     {
+        public int EventId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public int Type_Inoff { get; set; }
         public int LocationId { get; set; }
         public int ShowCategoryId { get; set; }
     }
