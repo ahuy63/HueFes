@@ -11,11 +11,11 @@ namespace HueFes.Core.Repositories
         {
         }
         public override async Task<Event> GetById(int id)
-        {
-            return await _dbSet.Include(x => x.EventImages).Include(x => x.Shows).ThenInclude(x => x.Location).SingleOrDefaultAsync(x => x.Id == id);
-        }
+            => await _dbSet.Include(x => x.EventImages).Include(x => x.Shows).ThenInclude(x => x.Location).SingleOrDefaultAsync(x => x.Id == id);
+
         public override async Task<IEnumerable<Event>> GetAllAsync()
             => await _dbSet.Include(x => x.EventImages).ToListAsync();
+
         public async Task<IEnumerable<Event>> GetByTieuDiem()
             => await _dbSet.Where(x => x.Type_Program == 1).Include(x => x.EventImages).ToListAsync();
 

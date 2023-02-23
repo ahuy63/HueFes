@@ -12,13 +12,10 @@ namespace HueFes.Core.Repositories
         }
 
         public override async Task<IEnumerable<Show>> GetAllAsync()
-        {
-            return await _dbSet.Include(x => x.Event).Include(x => x.Location).ToListAsync();
-        }
+            => await _dbSet.Include(x => x.Event).Include(x => x.Location).ToListAsync();
+
         public async Task<IEnumerable<Show>> GetByDate(DateTime date)
-        {
-            return await _dbSet.Where(x => x.StartDate.Date == date).Include(x => x.Event).Include(x => x.Location).ToListAsync();
-        }
+            => await _dbSet.Where(x => x.StartDate.Date == date).Include(x => x.Event).Include(x => x.Location).ToListAsync();
 
         public async Task<IEnumerable<IGrouping<DateTime,Show>>> GetAllByDate()
             => await _dbSet.GroupBy(x => x.StartDate).ToListAsync();
