@@ -8,8 +8,10 @@
 
         public string Title { get; set; }
         public string Summary { get; set; }
-        public string? Content { get; set; } = "Some HTML code....";
-        public string Image { get; set; } = "Image URL...";
+        public string? Content { get; set; }
+        public string Image { get; set; }
+
+        public int Type { get; set; } = 2;                            //1: Event, 2: Location, 3: News
         public string Longtitude { get; set; }
         public string Latitude { get; set; }
     }

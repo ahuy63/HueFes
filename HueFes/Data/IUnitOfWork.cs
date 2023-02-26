@@ -10,6 +10,8 @@ namespace HueFes.Data
         IShowRepository ShowRepository { get; }
         IShowCategoryRepository ShowCategoryRepository { get; }
         IEventImageRepository EventImageRepository { get; }
+        IHelpMenuRepository HelpMenuRepository { get; }
+        INewsRepository NewsRepository { get; }
 
         void Commit();
         void RollBack();
