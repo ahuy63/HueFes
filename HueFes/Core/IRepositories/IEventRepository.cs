@@ -6,5 +6,6 @@ namespace HueFes.Core.IRepositories
     {
         Task<IEnumerable<Event>> GetByTieuDiem();
         Task<IEnumerable<Event>> GetByCongDong();
+        Task<IEnumerable<Event>> GetFavourite();
     }
 }

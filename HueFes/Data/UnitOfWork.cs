@@ -16,7 +16,7 @@ namespace HueFes.Data
         public IEventImageRepository EventImageRepository {get; private set;}
         public IHelpMenuRepository HelpMenuRepository { get ; private set;}
         public INewsRepository NewsRepository { get; private set; }
-
+        public IFavouriteRepository FavouriteRepository { get; private set; }
         public UnitOfWork(HueFesDbContext context)
         {
             _context = context;
@@ -28,6 +28,7 @@ namespace HueFes.Data
             EventImageRepository = new EventImageRepository(_context);
             HelpMenuRepository= new HelpMenuRepository(_context);
             NewsRepository = new NewsRepository(_context);
+            FavouriteRepository= new FavouriteRepository(_context);
         }
 
 

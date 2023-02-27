@@ -10,6 +10,7 @@ namespace HueFes.Profiles
         {
             CreateMap<HelpMenuVM, HelpMenu>().ReverseMap();
             CreateMap<HelpMenuVM_Detail, HelpMenu>().ReverseMap();
+            CreateMap<HelpMenuVM_Input, HelpMenu>().ReverseMap();
         }
     }
 }

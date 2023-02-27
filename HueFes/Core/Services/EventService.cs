@@ -79,5 +79,43 @@ namespace HueFes.Core.Services
                 return false;
             }
         }
+
+        public async Task<bool> AddToFavourite(int id)
+        {
+            try
+            {
+                if (await _unitOfWork.EventRepository.GetById(id) != null)
+                {
+                    var fav = new Favourite { EventId = id, Type = 1 };
+                    await _unitOfWork.FavouriteRepository.Add(fav);
+                    await _unitOfWork.CommitAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> RemoveFavourite(int id)
+        {
+            try
+            {
+                var fav = await _unitOfWork.FavouriteRepository.GetByEventId(id);
+                if (fav != null)
+                {
+                    await _unitOfWork.FavouriteRepository.Delete(fav);
+                    await _unitOfWork.CommitAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

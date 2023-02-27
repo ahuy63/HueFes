@@ -24,6 +24,7 @@ builder.Services.AddTransient(typeof(IShowService), typeof(ShowService));
 builder.Services.AddTransient(typeof(IShowCategoryService), typeof(ShowCategoryService));
 builder.Services.AddTransient(typeof(IHelpMenuService), typeof(HelpMenuService));
 builder.Services.AddTransient(typeof(INewsService), typeof(NewsService));
+builder.Services.AddTransient(typeof(IFavouriteService), typeof(FavouriteService));
 
 
 

@@ -9,5 +9,7 @@ namespace HueFes.Core.IServices
         Task<bool> Add(Location location);
         Task<bool> Delete(int id);
         Task<bool> Update(Location location);
+        Task<bool> AddToFavourite(int id);
+        Task<bool> RemoveFavourite(int id);
     }
 }

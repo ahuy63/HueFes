@@ -65,5 +65,25 @@ namespace HueFes.Controllers
             }
             return BadRequest();
         }
+
+        [HttpPost("AddFavourite/{id}")]
+        public async Task<IActionResult> AddToFavourite(int id)
+        {
+            if (await _locationService.AddToFavourite(id))
+            {
+                return Ok("Done");
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete("RemoveFavourite/{id}")]
+        public async Task<IActionResult> RemoveFavourite(int id)
+        {
+            if (await _locationService.RemoveFavourite(id))
+            {
+                return Ok("Done");
+            }
+            return BadRequest();
+        }
     }
 }

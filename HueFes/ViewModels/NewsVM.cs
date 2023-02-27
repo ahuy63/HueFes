@@ -9,7 +9,7 @@
     }
     public class NewsVM_Input
     {
-        public string Tilte { get; set; }
+        public string Title { get; set; }
         public string Content { get; set; }
         public string ImageURL { get; set; }
     }

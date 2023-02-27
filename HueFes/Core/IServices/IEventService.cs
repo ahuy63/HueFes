@@ -12,5 +12,7 @@ namespace HueFes.Core.IServices
         Task<bool> AddImage(IEnumerable<EventImage> input);
         Task<bool> Delete(int id);
         Task<bool> Update(Event input);
+        Task<bool> AddToFavourite(int id);
+        Task<bool> RemoveFavourite(int id);
     }
 }

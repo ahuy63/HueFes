@@ -12,7 +12,7 @@ namespace HueFes.Data
         IEventImageRepository EventImageRepository { get; }
         IHelpMenuRepository HelpMenuRepository { get; }
         INewsRepository NewsRepository { get; }
-
+        IFavouriteRepository FavouriteRepository { get; }
         void Commit();
         void RollBack();
         Task CommitAsync();

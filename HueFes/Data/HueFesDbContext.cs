@@ -17,6 +17,6 @@ namespace HueFes.Data
         public DbSet<EventImage> EventImages { get; set; }
         public DbSet<HelpMenu> HelpMenus { get; set; }
         public DbSet<News> News { get; set; }
-
+        public DbSet<Favourite> Favorites { get; set; }
     }
 }

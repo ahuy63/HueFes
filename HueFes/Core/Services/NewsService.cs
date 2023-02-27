@@ -16,6 +16,7 @@ namespace HueFes.Core.Services
         {
             try
             {
+                input.DateCreated = DateTime.Now;
                 await _unitOfWork.NewsRepository.Add(input);
                 await _unitOfWork.CommitAsync();
                 return true;
@@ -53,6 +54,43 @@ namespace HueFes.Core.Services
                 await _unitOfWork.NewsRepository.Update(input);
                 await _unitOfWork.CommitAsync();
                 return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> AddToFavourite(int id)
+        {
+            try
+            {
+                if (await _unitOfWork.NewsRepository.GetById(id) != null)
+                {
+                    var fav = new Favourite { NewsId = id, Type = 3 };
+                    await _unitOfWork.FavouriteRepository.Add(fav);
+                    await _unitOfWork.CommitAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> RemoveFavourite(int id)
+        {
+            try
+            {
+                var fav = await _unitOfWork.FavouriteRepository.GetByNewsId(id);
+                if (fav != null)
+                {
+                    await _unitOfWork.FavouriteRepository.Delete(fav);
+                    await _unitOfWork.CommitAsync();
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {

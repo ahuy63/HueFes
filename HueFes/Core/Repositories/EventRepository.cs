@@ -21,5 +21,7 @@ namespace HueFes.Core.Repositories
 
         public async Task<IEnumerable<Event>> GetByCongDong()
             => await _dbSet.Where(x => x.Type_Program == 3).Include(x => x.EventImages).ToListAsync();
+        public async Task<IEnumerable<Event>> GetFavourite()
+            => await _dbSet.Where(x => x.Id == 1).ToListAsync();
     }
 }

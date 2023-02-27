@@ -9,5 +9,7 @@ namespace HueFes.Core.IServices
         Task<bool> Add(News input);
         Task<bool> Delete(int id);
         Task<bool> Update(News input);
+        Task<bool> AddToFavourite(int id);
+        Task<bool> RemoveFavourite(int id);
     }
 }
