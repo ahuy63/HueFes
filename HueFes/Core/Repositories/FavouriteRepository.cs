@@ -16,5 +16,13 @@ namespace HueFes.Core.Repositories
             => await _dbSet.FirstOrDefaultAsync(x => x.LocationId == locationId);
         public async Task<Favourite> GetByNewsId(int newsId)
             => await _dbSet.FirstOrDefaultAsync(x => x.NewsId == newsId);
+
+        public async Task<IEnumerable<Event>> GetFavouriteEvent()
+            => await _dbSet.Where(x => x.Type == 1).Include(x => x.Event).ThenInclude(x => x.EventImages).Select(x => x.Event).ToListAsync();
+        public async Task<IEnumerable<Location>> GetFavouriteLocation()
+            => await _dbSet.Where(x => x.Type == 2).Include(x => x.Location).Select(x => x.Location).ToListAsync();
+        public async Task<IEnumerable<News>> GetFavouriteNews()
+            => await _dbSet.Where(x => x.Type == 3).Include(x => x.News).Select(x => x.News).ToListAsync();
+
     }
 }

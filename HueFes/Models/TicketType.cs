@@ -3,12 +3,10 @@
     public class TicketType
     {
         public int Id { get; set; }
-        public string Code { get; set; }
-        public int TicketTypeId { get; set; }
-        public TicketType Type { get; set; }
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
-
-
+        public int ShowId { get; set; }
+        public Show Show { get; set; }
+        public string Zone { get; set; }
+        public double Price { get; set; }
+        public int Quantity { get; set; }
     }
 }

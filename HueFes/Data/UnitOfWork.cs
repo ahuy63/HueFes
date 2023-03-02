@@ -12,11 +12,14 @@ namespace HueFes.Data
         public IEventRepository EventRepository { get; private set; }
         public IShowRepository ShowRepository {get ; private set;}
         public IShowCategoryRepository ShowCategoryRepository { get; private set; }
-
         public IEventImageRepository EventImageRepository {get; private set;}
         public IHelpMenuRepository HelpMenuRepository { get ; private set;}
         public INewsRepository NewsRepository { get; private set; }
         public IFavouriteRepository FavouriteRepository { get; private set; }
+        public ICustomerRepository CustomerRepository { get; private set; }
+        public ITicketRepository TicketRepository { get; private set; }
+        public ITicketTypeRepository TicketTypeRepository { get; private set; }
+
         public UnitOfWork(HueFesDbContext context)
         {
             _context = context;
@@ -29,6 +32,9 @@ namespace HueFes.Data
             HelpMenuRepository= new HelpMenuRepository(_context);
             NewsRepository = new NewsRepository(_context);
             FavouriteRepository= new FavouriteRepository(_context);
+            CustomerRepository= new CustomerRepository(_context);
+            TicketRepository= new TicketRepository(_context);
+            TicketTypeRepository = new TicketTypeRepository(_context);
         }
 
 

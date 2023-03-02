@@ -72,10 +72,13 @@ namespace HueFes.Core.Services
             {
                 if (await _unitOfWork.LocationRepository.GetById(id) != null)
                 {
-                    var fav = new Favourite { LocationId = id, Type = 2 };
-                    await _unitOfWork.FavouriteRepository.Add(fav);
-                    await _unitOfWork.CommitAsync();
-                    return true;
+                    if (await _unitOfWork.FavouriteRepository.GetByLocationId(id) == null)
+                    {
+                        var fav = new Favourite { LocationId = id, Type = 2 };
+                        await _unitOfWork.FavouriteRepository.Add(fav);
+                        await _unitOfWork.CommitAsync();
+                        return true;
+                    }
                 }
                 return false;
             }

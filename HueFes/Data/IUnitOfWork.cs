@@ -13,6 +13,11 @@ namespace HueFes.Data
         IHelpMenuRepository HelpMenuRepository { get; }
         INewsRepository NewsRepository { get; }
         IFavouriteRepository FavouriteRepository { get; }
+        ICustomerRepository CustomerRepository { get; }
+        ITicketRepository TicketRepository { get; }
+        ITicketTypeRepository TicketTypeRepository { get; }
+
+
         void Commit();
         void RollBack();
         Task CommitAsync();

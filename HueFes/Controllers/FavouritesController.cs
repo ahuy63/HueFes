@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HueFes.Core.IServices;
+using HueFes.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HueFes.Controllers

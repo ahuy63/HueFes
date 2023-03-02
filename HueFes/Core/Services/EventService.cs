@@ -86,10 +86,13 @@ namespace HueFes.Core.Services
             {
                 if (await _unitOfWork.EventRepository.GetById(id) != null)
                 {
-                    var fav = new Favourite { EventId = id, Type = 1 };
-                    await _unitOfWork.FavouriteRepository.Add(fav);
-                    await _unitOfWork.CommitAsync();
-                    return true;
+                    if (await _unitOfWork.FavouriteRepository.GetByEventId(id) == null)
+                    {
+                        var fav = new Favourite { EventId = id, Type = 1 };
+                        await _unitOfWork.FavouriteRepository.Add(fav);
+                        await _unitOfWork.CommitAsync();
+                        return true;
+                    }
                 }
                 return false;
             }

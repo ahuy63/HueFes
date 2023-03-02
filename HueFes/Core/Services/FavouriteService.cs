@@ -18,14 +18,27 @@ namespace HueFes.Core.Services
 
         public async Task<FavouriteVM> GetAll()
         {
-            var fav = _unitOfWork.FavouriteRepository.GetAllAsync();
-            
+            //var fav = await _unitOfWork.FavouriteRepository.GetAll();
+            //return fav;
             return new FavouriteVM
             {
-                Events = _mapper.Map<ICollection<EventVM>>(await _unitOfWork.EventRepository.GetFavourite()),
-                Locations = _mapper.Map<ICollection<LocationVM>>(await _unitOfWork.LocationRepository.GetFavourite()),
-                News = _mapper.Map<ICollection<NewsVM>> (await _unitOfWork.NewsRepository.GetFavourite())
+                Events = _mapper.Map<ICollection<EventVM>>(await _unitOfWork.FavouriteRepository.GetFavouriteEvent()),
+                Locations = _mapper.Map<ICollection<LocationVM>>(await _unitOfWork.FavouriteRepository.GetFavouriteLocation()),
+                News = _mapper.Map<ICollection<NewsVM>>(await _unitOfWork.FavouriteRepository.GetFavouriteNews())
             };
+        }
+
+        public async Task<Favourite> GetFavouriteEvent(int eventId)
+        {
+            return await _unitOfWork.FavouriteRepository.GetByEventId(eventId);
+        }
+        public async Task<Favourite> GetFavouriteLocation(int locationId)
+        {
+            return await _unitOfWork.FavouriteRepository.GetByLocationId(locationId);
+        }
+        public async Task<Favourite> GetFavouriteNews(int newsId)
+        {
+            return await _unitOfWork.FavouriteRepository.GetByNewsId(newsId);
         }
     }
 }

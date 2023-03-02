@@ -8,5 +8,8 @@ namespace HueFes.Core.IRepositories
         Task<Favourite> GetByEventId(int eventId);
         Task<Favourite> GetByLocationId(int locationId);
         Task<Favourite> GetByNewsId(int newsId);
+        Task<IEnumerable<Event>> GetFavouriteEvent();
+        Task<IEnumerable<Location>> GetFavouriteLocation();
+        Task<IEnumerable<News>> GetFavouriteNews();
     }
 }

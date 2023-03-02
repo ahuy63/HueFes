@@ -67,10 +67,13 @@ namespace HueFes.Core.Services
             {
                 if (await _unitOfWork.NewsRepository.GetById(id) != null)
                 {
-                    var fav = new Favourite { NewsId = id, Type = 3 };
-                    await _unitOfWork.FavouriteRepository.Add(fav);
-                    await _unitOfWork.CommitAsync();
-                    return true;
+                    if (await _unitOfWork.FavouriteRepository.GetByNewsId(id) == null)
+                    {
+                        var fav = new Favourite { NewsId = id, Type = 3 };
+                        await _unitOfWork.FavouriteRepository.Add(fav);
+                        await _unitOfWork.CommitAsync();
+                        return true;
+                    }
                 }
                 return false;
             }

@@ -9,6 +9,9 @@ namespace HueFes.Profiles
         public FavouriteProfile()
         {
             CreateMap<FavouriteVM, Favourite>().ReverseMap();
+            CreateMap<Event, FavouriteVM>().ReverseMap();
+            CreateMap<Location, FavouriteVM>().ReverseMap();
+            CreateMap<News, FavouriteVM>().ReverseMap();
         }
     }
 }
