@@ -2,39 +2,80 @@
 using HueFes.Data;
 using HueFes.Models;
 
+
 namespace HueFes.Core.Services
 {
     public class CustomerService : ICustomerService
     {
         public IUnitOfWork _unitOfWork;
-        public CustomerService(IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+        public CustomerService(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
 
-        public Task<bool> Add(Customer input)
+        public async Task<Customer?> Add(Customer input)
         {
-            throw new NotImplementedException();
+            try
+            {
+                input.Role = "Customer";
+                var result = await _unitOfWork.CustomerRepository.Create(input);
+                await _unitOfWork.CommitAsync();
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _unitOfWork.CustomerRepository.Delete(await _unitOfWork.CustomerRepository.GetById(id));
+                await _unitOfWork.CommitAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public Task<IEnumerable<Customer>> GetAll()
+        public async Task<IEnumerable<Customer>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.CustomerRepository.GetAllAsync();
         }
 
-        public Task<Customer> GetById(int id)
+        public async Task<Customer> GetByEmail(string email)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.CustomerRepository.GetByEmail(email);
         }
 
-        public Task<bool> Update(Customer input)
+        public async Task<Customer> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.CustomerRepository.GetById(id);
         }
+
+        public async Task<Customer> GetByPhone(string phone)
+        {
+            return await _unitOfWork.CustomerRepository.GetByPhone(phone);
+        }
+        public async Task<bool> Update(Customer input)
+        {
+            try
+            {
+                await _unitOfWork.CustomerRepository.Update(input);
+                await _unitOfWork.CommitAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }

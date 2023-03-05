@@ -1,7 +1,11 @@
 using HueFes.Core.IServices;
 using HueFes.Core.Services;
 using HueFes.Data;
+using HueFes.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,24 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HueFesDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("HueFes")));
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+//JWT
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(jwt =>
+    {
+        var key = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
+        jwt.SaveToken = true;
+        jwt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            RequireExpirationTime = false
+        };
+    });
+
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient(typeof(ILocationService), typeof(LocationService));
@@ -44,6 +66,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

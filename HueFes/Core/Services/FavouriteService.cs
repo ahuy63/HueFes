@@ -18,8 +18,6 @@ namespace HueFes.Core.Services
 
         public async Task<FavouriteVM> GetAll()
         {
-            //var fav = await _unitOfWork.FavouriteRepository.GetAll();
-            //return fav;
             return new FavouriteVM
             {
                 Events = _mapper.Map<ICollection<EventVM>>(await _unitOfWork.FavouriteRepository.GetFavouriteEvent()),

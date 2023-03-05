@@ -6,7 +6,9 @@ namespace HueFes.Core.IServices
     {
         Task<IEnumerable<Customer>> GetAll();
         Task<Customer> GetById(int id);
-        Task<bool> Add(Customer input);
+        Task<Customer> GetByPhone(string phone);
+        Task<Customer> GetByEmail(string email);
+        Task<Customer?> Add(Customer input);
         Task<bool> Delete(int id);
         Task<bool> Update(Customer input);
     }
