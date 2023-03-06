@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HueFes.Core.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
 
         protected readonly HueFesDbContext _context;
@@ -26,10 +26,10 @@ namespace HueFes.Core.Repositories
             return true;
         }
 
-        public virtual async Task<bool> Delete(T entity)
+        public virtual Task<bool> Delete(T entity)
         {
             _dbSet.Remove(entity);
-            return true;
+            return Task.FromResult(true);
         }
 
         public virtual async Task<bool> Update(T entity)

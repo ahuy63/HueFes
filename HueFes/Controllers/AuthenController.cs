@@ -19,7 +19,7 @@ namespace HueFes.Controllers
         public ICustomerService _customerService { get; set; }
         private readonly IConfiguration _configuration;
         public readonly IMapper _mapper;
-        public static string _otp = ""; 
+        public static string? _otp; 
 
         public AuthenController(ICustomerService customerService, IMapper mapper, IConfiguration configuration)
         {

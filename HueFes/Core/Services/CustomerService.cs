@@ -8,11 +8,9 @@ namespace HueFes.Core.Services
     public class CustomerService : ICustomerService
     {
         public IUnitOfWork _unitOfWork;
-        private readonly IConfiguration _configuration;
-        public CustomerService(IUnitOfWork unitOfWork, IConfiguration configuration)
+        public CustomerService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _configuration = configuration;
         }
 
         public async Task<Customer?> Add(Customer input)
