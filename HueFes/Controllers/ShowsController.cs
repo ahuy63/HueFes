@@ -20,18 +20,14 @@ namespace HueFes.Controllers
         }
 
         [HttpGet("GetAllShows")]
-        public async Task<IActionResult> GetAll() 
-            => Ok(_mapper.Map<IEnumerable<ShowVM>>(await _showService.GetAll()).GroupBy(x => x.StartDate));
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(_mapper.Map<IEnumerable<ShowVM>>(await _showService.GetAll()).GroupBy(x => x.StartDate));
+        }
 
         [HttpGet("GetByDate")]
         public async Task<IActionResult> GetByDate(DateTime date)
             => Ok(_mapper.Map<IEnumerable<ShowVM>>(await _showService.GetByDate(date)));
-
-        //[HttpGet("GetAllByDate")]
-        //public async Task<IEnumerable<IGrouping<DateTime, ShowVM>>> GetAllByDate()
-        //{
-        //    return _mapper.Map<IEnumerable<ShowVM>>(await _showService.GetAll()).GroupBy(x => x.StartDate);
-        //}
 
         [HttpGet("GetById/{id}")]
         public async Task<IActionResult> GetById(int id)

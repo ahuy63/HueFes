@@ -12,22 +12,27 @@ namespace HueFes.Controllers
     public class TicketTypesController : ControllerBase
     {
         public ITicketTypeService _ticketTypeService;
+        public IShowService _showService;
         public readonly IMapper _mapper;
-        public TicketTypesController(ITicketTypeService ticketTypeService, IMapper mapper)
+        public TicketTypesController(ITicketTypeService ticketTypeService, IShowService showService, IMapper mapper)
         {
             _ticketTypeService = ticketTypeService;
+            _showService = showService;
             _mapper = mapper;
         }
 
         [HttpGet("GetByShow/{showId}")]
         public async Task<IActionResult> GetByShowId(int showId)
         {
-            return Ok(_mapper.Map<IEnumerable<TicketTypeVM>>( await _ticketTypeService.GetByShowId(showId)));
+            var a = await _ticketTypeService.GetByShowId(showId);
+            return Ok(_mapper.Map<IEnumerable<TicketTypeVM>>(await _ticketTypeService.GetByShowId(showId)));
         }
 
         [HttpPost("AddTicketType/{showId}")]
         public async Task<IActionResult> AddTicketType(int showId, List<TicketTypeVM_Input> inputList)
         {
+            var show = await _showService.GetById(showId);
+            
             //inputList.All(x => { x.ShowId = showId; return true; });
             var mappedInput = _mapper.Map<List<TicketType>>(inputList);
             mappedInput.ForEach(x => x.ShowId = showId);

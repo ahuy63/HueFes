@@ -62,14 +62,6 @@ namespace HueFes.Controllers
             return BadRequest();
         }
 
-        [Authorize]
-        [HttpGet("GetCurrentUserInfo")]
-        public async Task<IActionResult> GetCurrentUserInfo()
-        {
-            int currentUserId = GetCurrentUserId();
-            return Ok(await _customerService.GetById(currentUserId));
-        }
-
         
         [HttpGet("GetOTP")]
         public async Task<IActionResult> GetOTP()
@@ -110,21 +102,5 @@ namespace HueFes.Controllers
             }
             return 0;
         }
-
-        //private string GetCurrentOTP()
-        //{
-        //    var identity = User.Identity as ClaimsIdentity;
-        //    if (identity != null)
-        //    {
-        //        var userClaim = identity.Claims;
-        //        return userClaim.FirstOrDefault(x => x.Type == "OTP")?.Value;
-        //    }
-        //    return null;
-        //}
-
-        //private string OTPGenerator()
-        //{
-        //    return new Random().Next(0, 9999).ToString("D4");
-        //}
     }
 }

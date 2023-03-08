@@ -8,5 +8,7 @@
         public TicketType Type { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public bool Status { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

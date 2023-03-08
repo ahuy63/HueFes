@@ -44,14 +44,14 @@ namespace HueFes.Core.Services
             }
         }
 
-        public Task<TicketType> GetById(int id)
+        public async Task<TicketType> GetById(int id)
         {
-            return _unitOfWork.TicketTypeRepository.GetById(id);
+            return await _unitOfWork.TicketTypeRepository.GetById(id);
         }
 
-        public Task<TicketType> GetByShowId(int showId)
+        public async Task<IEnumerable<TicketType>> GetByShowId(int showId)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.TicketTypeRepository.GetByShowId(showId);
         }
 
         public async Task<bool> Update(TicketType input)

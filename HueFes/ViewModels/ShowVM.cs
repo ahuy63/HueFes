@@ -9,6 +9,10 @@ namespace HueFes.ViewModels
         public string EventName { get; set; }
         public int Type_Inoff { get; set; }
 
+        public string Type { get; set; }
+
+        public double Price { get; set; }
+
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 

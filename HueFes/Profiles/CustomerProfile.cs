@@ -12,6 +12,7 @@ namespace HueFes.Profiles
             CreateMap<CustomerVM_Create, Customer>().ReverseMap();
             CreateMap<CustomerVM_Login, Customer>().ReverseMap();
             CreateMap<CustomerVM_Update, Customer>().ReverseMap();
+            CreateMap<CustomerVM_Detail, Customer>().ReverseMap();
         }
     }
 }

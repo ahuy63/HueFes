@@ -25,4 +25,12 @@ namespace HueFes.ViewModels
         public string Name { get; set; }
         public string Email { get; set; }
     }
+    public class CustomerVM_Detail
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public ICollection<TicketVM> Tickets { get; set; }
+    }
 }
