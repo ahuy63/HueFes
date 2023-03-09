@@ -9,5 +9,6 @@ namespace HueFes.Core.IServices
         Task<bool> Add(IEnumerable<TicketType> inputList);
         Task<bool> Delete(int id);
         Task<bool> Update(TicketType input);
+        Task UpdateTicketQuantity(int ticketTypeId, int quantity);
     }
 }

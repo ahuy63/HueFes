@@ -9,9 +9,11 @@ namespace HueFes.Core.Services
     public class TicketService : ITicketService
     {
         public IUnitOfWork _unitOfWork;
-        public TicketService(IUnitOfWork unitOfWork)
+        public ITicketTypeService _ticketTypeService;
+        public TicketService(IUnitOfWork unitOfWork, ITicketTypeService ticketTypeService)
         {
             _unitOfWork = unitOfWork;
+            _ticketTypeService = ticketTypeService;
         }
 
         public async Task<bool> BuyTicket(List<BuyTicketVM> inputList, int customerId)
@@ -33,7 +35,8 @@ namespace HueFes.Core.Services
                         };
                         await _unitOfWork.TicketRepository.Add(ticket);
                     }
-                    await UpdateTicketQuantity(item.TicketTypeId, item.quantity);
+                    await _ticketTypeService.UpdateTicketQuantity(item.TicketTypeId, -item.quantity); // tru so luong ve trong kho
+                    //await UpdateTicketQuantity(item.TicketTypeId, item.quantity);
                 }
 
                 await _unitOfWork.CommitAsync();
@@ -60,7 +63,7 @@ namespace HueFes.Core.Services
             {
                 var ticket = await _unitOfWork.TicketRepository.GetById(id);
                 await _unitOfWork.TicketRepository.Delete(ticket);
-                await UpdateTicketQuantity(ticket.TicketTypeId, -1);
+                await _ticketTypeService.UpdateTicketQuantity(ticket.TicketTypeId, 1);//Tang luong ve trong kho
                 await _unitOfWork.CommitAsync();
                 return true;
             }
@@ -85,19 +88,19 @@ namespace HueFes.Core.Services
             throw new NotImplementedException();
         }
 
-        private async Task UpdateTicketQuantity(int ticketTypeId, int quantity)
-        {
-            try
-            {
-                var ticketType = await _unitOfWork.TicketTypeRepository.GetById(ticketTypeId);
-                ticketType.Quantity -= quantity;
-                await _unitOfWork.TicketTypeRepository.Update(ticketType);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public async Task UpdateTicketQuantity(int ticketTypeId, int quantity)
+        //{
+        //    try
+        //    {
+        //        var ticketType = await _unitOfWork.TicketTypeRepository.GetById(ticketTypeId);
+        //        ticketType.Quantity -= quantity;
+        //        await _unitOfWork.TicketTypeRepository.Update(ticketType);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
         private async Task<string> GenerateCode()
         {

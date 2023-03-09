@@ -32,8 +32,7 @@ namespace HueFes.Controllers
         public async Task<IActionResult> AddTicketType(int showId, List<TicketTypeVM_Input> inputList)
         {
             var show = await _showService.GetById(showId);
-            
-            //inputList.All(x => { x.ShowId = showId; return true; });
+
             var mappedInput = _mapper.Map<List<TicketType>>(inputList);
             mappedInput.ForEach(x => x.ShowId = showId);
             if (await _ticketTypeService.Add(mappedInput))

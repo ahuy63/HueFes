@@ -80,7 +80,6 @@ namespace HueFes.Controllers
                 return BadRequest();
             }
             return NotFound();
-
         }
 
 

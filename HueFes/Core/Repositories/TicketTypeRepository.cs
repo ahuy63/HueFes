@@ -15,5 +15,10 @@ namespace HueFes.Core.Repositories
         {
             return await _dbSet.Where(x => x.ShowId == showId).ToListAsync();
         }
+
+        public async Task<TicketType> GetByZone(string zone, int showId)
+        {
+            return await _dbSet.Where(x => x.Zone == zone).Where(x => x.ShowId == showId).FirstOrDefaultAsync();
+        }
     }
 }

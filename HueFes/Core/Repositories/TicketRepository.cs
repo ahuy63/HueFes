@@ -15,5 +15,5 @@ namespace HueFes.Core.Repositories
         {
             return await _dbSet.FirstOrDefaultAsync(x => x.Code == code);
         }
-    }
+    }   
 }
