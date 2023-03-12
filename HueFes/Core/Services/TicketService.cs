@@ -73,9 +73,9 @@ namespace HueFes.Core.Services
             }
         }
 
-        public Task<IEnumerable<Ticket>> GetAll()
+        public async Task<IEnumerable<Ticket>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.TicketRepository.GetAllAsync();
         }
 
         public Task<Ticket> GetById(int id)
@@ -83,24 +83,19 @@ namespace HueFes.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(Ticket input)
+        public async Task<bool> Update(Ticket input)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _unitOfWork.TicketRepository.Update(input);
+                await _unitOfWork.CommitAsync(); 
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-
-        //public async Task UpdateTicketQuantity(int ticketTypeId, int quantity)
-        //{
-        //    try
-        //    {
-        //        var ticketType = await _unitOfWork.TicketTypeRepository.GetById(ticketTypeId);
-        //        ticketType.Quantity -= quantity;
-        //        await _unitOfWork.TicketTypeRepository.Update(ticketType);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
 
         private async Task<string> GenerateCode()
         {

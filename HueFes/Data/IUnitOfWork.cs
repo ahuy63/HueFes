@@ -16,7 +16,8 @@ namespace HueFes.Data
         ICustomerRepository CustomerRepository { get; }
         ITicketRepository TicketRepository { get; }
         ITicketTypeRepository TicketTypeRepository { get; }
-
+        IStaffRepository StaffRepository { get; }
+        ICheckinRepository CheckinRepository { get; }
 
         void Commit();
         void RollBack();

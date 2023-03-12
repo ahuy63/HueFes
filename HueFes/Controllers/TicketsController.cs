@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HueFes.Core.IServices;
+using HueFes.Models;
 using HueFes.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,14 @@ namespace HueFes.Controllers
 
 
         //Quan ly ve
+        [HttpGet("GetAllTicket")]
+        public async Task<IActionResult> GetAllTicket()
+        {
+            return Ok(_mapper.Map<IEnumerable<TicketVM>>(await _ticketService.GetAll()));
+        }
+
+
+
 
 
 

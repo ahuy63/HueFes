@@ -19,7 +19,8 @@ namespace HueFes.Data
         public ICustomerRepository CustomerRepository { get; private set; }
         public ITicketRepository TicketRepository { get; private set; }
         public ITicketTypeRepository TicketTypeRepository { get; private set; }
-
+        public IStaffRepository StaffRepository { get; private set; }
+        public ICheckinRepository CheckinRepository { get; private set; }
         public UnitOfWork(HueFesDbContext context)
         {
             _context = context;
@@ -35,6 +36,8 @@ namespace HueFes.Data
             CustomerRepository= new CustomerRepository(_context);
             TicketRepository= new TicketRepository(_context);
             TicketTypeRepository = new TicketTypeRepository(_context);
+            CheckinRepository = new CheckinRepository(_context);
+            StaffRepository = new StaffRepository(_context);
         }
 
 

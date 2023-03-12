@@ -18,9 +18,10 @@ namespace HueFes.Data
         public DbSet<HelpMenu> HelpMenus { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Favourite> Favorites { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<TicketType> TicketTypes { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Checkin> Checkins { get; set; }
     }
 }
