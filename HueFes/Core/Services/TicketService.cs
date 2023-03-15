@@ -78,9 +78,9 @@ namespace HueFes.Core.Services
             return await _unitOfWork.TicketRepository.GetAllAsync();
         }
 
-        public Task<Ticket> GetById(int id)
+        public async Task<Ticket> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.TicketRepository.GetById(id);
         }
 
         public async Task<bool> Update(Ticket input)
@@ -109,5 +109,21 @@ namespace HueFes.Core.Services
             }
             return code;
         }
+
+        public async Task<bool> CheckQuantity(int ticketTypeId, int buyQuantity)
+        {
+            var ticketType = await _unitOfWork.TicketTypeRepository.GetById(ticketTypeId);
+            if (ticketType.Quantity < buyQuantity)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<Ticket> GetByCode(string code)
+        {
+            return await _unitOfWork.TicketRepository.GetByCode(code);
+        }
+
     }
 }

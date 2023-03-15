@@ -4,6 +4,8 @@ using HueFes.Models;
 using HueFes.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using QRCoder;
+using System.Drawing;
 using System.Security.Claims;
 
 namespace HueFes.Controllers
@@ -25,6 +27,13 @@ namespace HueFes.Controllers
         [HttpPost("BuyTicket")]
         public async Task<IActionResult> BuyTicket(List<BuyTicketVM> inputList)
         {
+            foreach (var item in inputList)                         //Check so luong ve trong kho
+            {
+                if (!await _ticketService.CheckQuantity(item.TicketTypeId, item.quantity))
+                {
+                    return Ok("không đủ số lượng vé!!!");
+                }
+            }
             if (await _ticketService.BuyTicket(inputList, GetCurrentUserId()))
             {
                 return Ok("Buy Successfully!!!");
@@ -44,9 +53,36 @@ namespace HueFes.Controllers
         }
 
 
+        [HttpGet("GetTicketQR/{ticketId}")]
+        public async Task<IActionResult> GetTicketQR(int ticketId)
+        {
+            var ticket = await _ticketService.GetById(ticketId);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+            var ticketVM = _mapper.Map<TicketVM>(ticket);
+            return File(QRGenerator(ticket.Code), "image/jpeg");
+        }
+
+        [HttpGet("GetByCode")]
+        public async Task<IActionResult> GetByCode(string code)
+        {
+            return Ok(_mapper.Map<TicketVM>(await _ticketService.GetByCode(code)));
+        }
 
 
-        //Check in ve cho staff
+
+
+        private byte[] QRGenerator(string code)
+        {
+            //string url = "https://localhost:7236/api/Tickets/GetByCode?code=" + code;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
+            BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
+            byte[] qrCodeAsBitmapByteArr = qrCode.GetGraphic(10);
+            return qrCodeAsBitmapByteArr;
+        }
 
 
 

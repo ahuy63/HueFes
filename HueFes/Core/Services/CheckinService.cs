@@ -2,6 +2,7 @@
 using HueFes.Core.IServices;
 using HueFes.Data;
 using HueFes.Models;
+using HueFes.ViewModels;
 
 namespace HueFes.Core.Services
 {
@@ -71,6 +72,25 @@ namespace HueFes.Core.Services
         public Task<bool> Update(Checkin checkin)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Checkin>> GetAllByStaffId(int staffId)
+        {
+            return await _unitOfWork.CheckinRepository.GetAllByStaffId(staffId);
+        }
+
+        public async Task<List<BaoCaoDetailsVM>> GetBaoCao(int staffId)
+        {
+            try
+            {
+                var baoCaos = await _unitOfWork.CheckinRepository.GetBaoCao(staffId);
+                return baoCaos;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
         }
     }
 }

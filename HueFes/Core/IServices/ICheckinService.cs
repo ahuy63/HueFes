@@ -1,4 +1,5 @@
 ﻿using HueFes.Models;
+using HueFes.ViewModels;
 
 namespace HueFes.Core.IServices
 {
@@ -11,5 +12,11 @@ namespace HueFes.Core.IServices
         Task<bool> Update(Checkin checkin);
 
         Task<dynamic?> CheckCode(int showId, string code);
+
+
+
+        Task<IEnumerable<Checkin>> GetAllByStaffId(int staffId);
+        Task<List<BaoCaoDetailsVM>> GetBaoCao(int staffId);
+
     }
 }
