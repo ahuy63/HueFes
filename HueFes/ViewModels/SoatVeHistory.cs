@@ -47,6 +47,13 @@ namespace HueFes.ViewModels
                     .Where(x => x.ChuongTrinhId == chuongTrinhId)
                     .ToList();
             }
+            if (!theoLoai.IsNullOrEmpty() && theoNgay.HasValue && chuongTrinhId.HasValue)
+            {
+                this.Checkins = checkins.Where(x => x.NgaySoatVe == theoNgay?.ToShortDateString())
+                    .Where(x => x.LoaiVe == theoLoai)
+                    .Where(x => x.ChuongTrinhId == chuongTrinhId)
+                    .ToList();
+            }
             if (!theoNgay.HasValue && theoLoai.IsNullOrEmpty() && !chuongTrinhId.HasValue)
             {
                 this.Checkins = checkins;
