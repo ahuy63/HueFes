@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HueFes.Core.IServices;
-using HueFes.Models;
+using HueFes.DomainModels;
 using HueFes.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace HueFes.Controllers
         }
 
         //Staff
-        [Authorize(Roles ="Staff")]
+        [Authorize(Roles ="Staff, Admin")]
         [HttpPut("ChangePassword")]
         public async Task<IActionResult> ChangePassword(StaffVM_ChangePassword input)
         {
@@ -64,9 +64,15 @@ namespace HueFes.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> CreateNew(StaffVM_Create input)
         {
-            if (await _staffService.Add(_mapper.Map<Staff>(input)))
+            if (await _staffService.GetByPhone(input.Phone) != null)
             {
-                return Ok("Add Successfully!!!");
+                return BadRequest("Phone is existed");
+            }
+
+            var password = await _staffService.Add(_mapper.Map<Staff>(input));
+            if (password != null)
+            {
+                return Ok("Add Successfully!!!\n Your Password: " + password);
             }
             return BadRequest();
         }

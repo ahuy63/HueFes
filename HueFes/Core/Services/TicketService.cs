@@ -1,6 +1,6 @@
 ﻿using HueFes.Core.IServices;
 using HueFes.Data;
-using HueFes.Models;
+using HueFes.DomainModels;
 using HueFes.ViewModels;
 using System;
 

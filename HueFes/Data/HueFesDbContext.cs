@@ -1,4 +1,4 @@
-﻿using HueFes.Models;
+﻿using HueFes.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace HueFes.Data

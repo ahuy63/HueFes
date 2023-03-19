@@ -1,4 +1,4 @@
-﻿using HueFes.Models;
+﻿using HueFes.DomainModels;
 using HueFes.ViewModels;
 
 namespace HueFes.Core.IServices

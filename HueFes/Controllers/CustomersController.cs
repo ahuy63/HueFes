@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HueFes.Core.IServices;
 using HueFes.Core.Services;
-using HueFes.Models;
+using HueFes.DomainModels;
 using HueFes.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

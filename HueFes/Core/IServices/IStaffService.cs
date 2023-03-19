@@ -1,4 +1,4 @@
-﻿using HueFes.Models;
+﻿using HueFes.DomainModels;
 using HueFes.ViewModels;
 
 namespace HueFes.Core.IServices
@@ -7,7 +7,8 @@ namespace HueFes.Core.IServices
     {
         Task<IEnumerable<Staff>> GetAll();
         Task<Staff> GetById(int id);
-        Task<bool> Add(Staff staff);
+        Task<Staff?> GetByPhone(string phone);
+        Task<string?> Add(Staff staff);
         Task<bool> Delete(int id);
         Task<bool> Update(Staff staff);
         Task<Staff?> Login (StaffVM_Login input);

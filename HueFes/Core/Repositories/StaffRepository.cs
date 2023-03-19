@@ -1,6 +1,6 @@
 ﻿using HueFes.Core.IRepositories;
 using HueFes.Data;
-using HueFes.Models;
+using HueFes.DomainModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace HueFes.Core.Repositories
@@ -16,9 +16,5 @@ namespace HueFes.Core.Repositories
             return await _dbSet.FirstOrDefaultAsync(x => x.Phone == phone);
         }
 
-        public async Task<Staff?> Login(string phone, string password)
-        {
-            return await _dbSet.FirstOrDefaultAsync(x => x.Phone == phone && x.Password == password);
-        }
     }
 }

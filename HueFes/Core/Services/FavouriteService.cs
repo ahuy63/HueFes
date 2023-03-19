@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HueFes.Core.IServices;
 using HueFes.Data;
-using HueFes.Models;
+using HueFes.DomainModels;
 using HueFes.ViewModels;
 
 namespace HueFes.Core.Services

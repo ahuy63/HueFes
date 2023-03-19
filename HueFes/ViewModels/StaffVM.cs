@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace HueFes.ViewModels
 {
+    using BCrypt.Net;
     public class StaffVM
     {
         public string Name { get; set; }
@@ -62,7 +63,11 @@ namespace HueFes.ViewModels
 
         public string? CheckInput(string oldPassword)
         {
-            if (OldPassword != oldPassword)
+            //if (!PasswordHashPbkdf2.ValidatePassword(this.OldPassword, oldPassword))
+            //{
+            //    return "Old Password does not match!!!";
+            //}
+            if (!BCrypt.Verify(this.OldPassword, oldPassword))
             {
                 return "Old Password does not match!!!";
             }
@@ -70,7 +75,7 @@ namespace HueFes.ViewModels
             {
                 return "New password and confirm new password does not match!!!";
             }
-            if (NewPassword == OldPassword)
+            if (this.NewPassword == this.OldPassword)
             {
                 return "New Password must be different from old Password";
             }

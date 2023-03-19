@@ -1,5 +1,4 @@
-﻿using HueFes.Models;
-using System.Threading.Tasks;
+﻿using HueFes.DomainModels;
 
 namespace HueFes.Core.IRepositories
 {

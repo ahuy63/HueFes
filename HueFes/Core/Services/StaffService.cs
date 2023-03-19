@@ -2,9 +2,11 @@
 using HueFes.Data;
 using HueFes.Models;
 using HueFes.ViewModels;
+using HueFes.DomainModels;
 
 namespace HueFes.Core.Services
 {
+    using BCrypt.Net;
     public class StaffService : IStaffService
     {
         public IUnitOfWork _unitOfWork;
@@ -34,17 +36,22 @@ namespace HueFes.Core.Services
             
         }
 
-        public async Task<bool> Add(Staff staff)
+        public async Task<string?> Add(Staff staff)
         {
             try
             {
+                var password = staff.Password; //Password duoc tu dong khoi tao trong class StaffVM_Create     //luu bien password de return 
+                //staff.Password = PasswordHashPbkdf2.HashPassword(staff.Password);         //Hash Password pbkdf2
+
+                staff.Password = BCrypt.HashPassword(staff.Password);
+
                 await _unitOfWork.StaffRepository.Add(staff);
                 await _unitOfWork.CommitAsync();
-                return true;
+                return password;
             }
             catch (Exception)
             {
-                return false;
+                return null;
             }
         }
 
@@ -72,11 +79,31 @@ namespace HueFes.Core.Services
             return await _unitOfWork.StaffRepository.GetById(id);
         }
 
+        public async Task<Staff?> GetByPhone(string phone)
+        {
+            return await _unitOfWork.StaffRepository.GetByPhone(phone);
+        }
+
         public async Task<Staff?> Login(StaffVM_Login input)
         {
             try
             {
-                return await _unitOfWork.StaffRepository.Login(input.Phone, input.Password);
+                var result = await _unitOfWork.StaffRepository.GetByPhone(input.Phone);
+                if (result == null)
+                {
+                    return null;
+                }
+                if (BCrypt.Verify(input.Password, result.Password))
+                {
+                    return result;
+                }
+                //if(PasswordHashPbkdf2.ValidatePassword(input.Password, result.Password))  //pbkdf2
+                //{
+                //    return result;
+                //}
+
+
+                return null;
             }
             catch (Exception)
             {
@@ -88,6 +115,8 @@ namespace HueFes.Core.Services
         {
             try
             {
+                //staff.Password = PasswordHashPbkdf2.HashPassword(staff.Password);  //pbkdf2
+                staff.Password = BCrypt.HashPassword(staff.Password);
                 await _unitOfWork.StaffRepository.Update(staff);
                 await _unitOfWork.CommitAsync();
                 return true;
@@ -96,15 +125,6 @@ namespace HueFes.Core.Services
             {
                 return false;
             }
-        }
-
-        private string GeneratePassword()
-        {
-            var random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var pass = new string(Enumerable.Repeat(chars, 8)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-            return pass;
         }
     }
 }

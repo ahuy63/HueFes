@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HueFes.Core.IServices;
-using HueFes.Models;
+using HueFes.DomainModels;
 using HueFes.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 

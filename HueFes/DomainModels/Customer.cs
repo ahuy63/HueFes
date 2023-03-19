@@ -1,4 +1,4 @@
-﻿namespace HueFes.Models
+﻿namespace HueFes.DomainModels
 {
     public class Customer
     {
