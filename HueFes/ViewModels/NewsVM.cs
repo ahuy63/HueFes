@@ -1,4 +1,6 @@
-﻿namespace HueFes.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HueFes.ViewModels
 {
     public class NewsVM
     {
@@ -9,7 +11,9 @@
     }
     public class NewsVM_Input
     {
+        [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "Content is required")]
         public string Content { get; set; }
         public string ImageURL { get; set; }
     }

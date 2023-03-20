@@ -1,7 +1,7 @@
 using HueFes.Core.IServices;
 using HueFes.Core.Services;
 using HueFes.Data;
-using HueFes.ViewModels;
+using HueFes.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

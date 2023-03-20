@@ -49,6 +49,11 @@ namespace HueFes.Controllers
                     var ticketInfo = _mapper.Map<TicketVM>(result.ticket);
                     return Ok(new { message = "Ve hop le!!!\nThong tin ve:\n", ticketInfo });
                 }
+
+                //Neu lỗi luu checkinHistory, trả lại trạng thái vé chưa kích hoạt
+                result.ticket.Status = false;
+                await _ticketService.Update(result.ticket);
+                return BadRequest("Loi he thong");
             }
             return BadRequest("Loi he thong");
         }

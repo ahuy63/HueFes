@@ -1,4 +1,5 @@
 ﻿using HueFes.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HueFes.ViewModels
 {
@@ -11,12 +12,18 @@ namespace HueFes.ViewModels
     }
     public class LocationVM_Input
     {
+        [Required]
         public int LocationCategoryId { get; set; }
+        [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "Summary is required")]
         public string Summary { get; set; }
-        public string? Content { get; set; } = "Some HTML code....";
-        public string Image { get; set; } = "Image URL...";
+        [Required(ErrorMessage = "Content is required")]
+        public string? Content { get; set; }
+        public string Image { get; set; }
+        [Required]
         public string Longtitude { get; set; }
+        [Required]
         public string Latitude { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace HueFes.ViewModels
+﻿namespace HueFes.Models
 {
     public class JwtConfig
     {

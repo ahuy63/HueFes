@@ -1,4 +1,5 @@
 ﻿using HueFes.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HueFes.ViewModels
 {
@@ -26,11 +27,17 @@ namespace HueFes.ViewModels
     }
     public class ShowVM_Input
     {
+        [Required]
         public int EventId { get; set; }
+        [Required]
         public DateTime StartDate { get; set; }
+        [Required]
         public DateTime EndDate { get; set; }
+        [Required]
         public int Type_Inoff { get; set; }
+        [Required]
         public int LocationId { get; set; }
+        [Required]
         public int ShowCategoryId { get; set; }
     }
     public class ShowVM_Detail

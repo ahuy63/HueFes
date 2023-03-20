@@ -1,4 +1,6 @@
-﻿namespace HueFes.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HueFes.ViewModels
 {
     public class ShowCategoryVM
     {
@@ -8,6 +10,7 @@
 
     public class ShowCategoryVM_Input
     {
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
     }
 

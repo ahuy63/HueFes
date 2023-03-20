@@ -14,7 +14,7 @@ namespace HueFes.ViewModels
         }
         public SoatVeHistory(DateTime? theoNgay, string? theoLoai, int? chuongTrinhId, List<CheckinVM> checkins)
         {
-            if (theoLoai == null && chuongTrinhId == null && theoNgay != null)
+            if (theoLoai.IsNullOrEmpty() && !chuongTrinhId.HasValue && theoNgay.HasValue)
             {
                 this.Checkins = checkins.Where(x => x.NgaySoatVe == theoNgay?.ToShortDateString())
                     .ToList();

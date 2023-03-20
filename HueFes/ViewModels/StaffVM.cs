@@ -63,7 +63,7 @@ namespace HueFes.ViewModels
 
         public string? CheckInput(string oldPassword)
         {
-            //if (!PasswordHashPbkdf2.ValidatePassword(this.OldPassword, oldPassword))
+            //if (!PasswordHashPbkdf2.ValidatePassword(this.OldPassword, oldPassword))      /pbkdf2
             //{
             //    return "Old Password does not match!!!";
             //}

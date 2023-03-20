@@ -12,7 +12,7 @@ namespace HueFes.ViewModels
 
     public class LocationCategoryVM_Input
     {
-        [Required]
+        [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
         public string Image { get; set; }
     }

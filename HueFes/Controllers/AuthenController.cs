@@ -30,7 +30,7 @@ namespace HueFes.Controllers
             _staffService = staffService;
         }
 
-        //Customer
+        //Customer Section
         [HttpPost("CustomerLogin")]
         public async Task<IActionResult> Login_Customer(CustomerVM_Login input)
         {
@@ -65,7 +65,7 @@ namespace HueFes.Controllers
         }
 
 
-        //Staff
+        //Staff Section
         [HttpPost("StaffLogin")]
         public async Task<IActionResult> StaffLogin (StaffVM_Login input)
         {
@@ -98,20 +98,12 @@ namespace HueFes.Controllers
         }
 
 
-        
-
-
-
-
         [HttpGet("GetOTP")]
         public async Task<IActionResult> GetOTP()
         {
             _otp = new Random().Next(0, 9999).ToString("D4");
             return Ok(_otp);
         }
-
-
-
 
         private string GenerateJwtToken(dynamic dy)
         {

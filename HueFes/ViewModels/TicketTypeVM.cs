@@ -1,4 +1,5 @@
 ﻿using HueFes.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HueFes.ViewModels
 {
@@ -11,8 +12,11 @@ namespace HueFes.ViewModels
     }
     public class TicketTypeVM_Input
     {
+        [Required(ErrorMessage = "Zone is required")]
         public string Zone { get; set; }
+        [Required(ErrorMessage = "Price is required")]
         public double Price { get; set; }
+        [Required(ErrorMessage = "Quantity is required")]
         public int Quantity { get; set; }
     }
 }
